@@ -1,14 +1,18 @@
-
+import { HeroSection } from '../components/HeroSection';
 import { MovieGridSection } from '../components/MovieGridSection';
-import { getMoviesByCategory } from '../data/movies';
+import { getFeaturedMovie, getMoviesByCategory } from '../data/movies';
 
 export function MovieListPage() {
+  const featuredMovie = getFeaturedMovie();
   const classicsMovies = getMoviesByCategory('Classics');
   const antiWarMovies = getMoviesByCategory('Anti-war');
   const silentCinemaMovies = getMoviesByCategory('Silent Cinema');
 
   return (
     <div className="min-h-screen bg-background">
+      
+      {/* Hero Section */}
+      <HeroSection movie={featuredMovie} />
 
       {/* Movie Grid Sections */}
       <div className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">

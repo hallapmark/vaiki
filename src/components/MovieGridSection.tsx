@@ -17,7 +17,7 @@ export function MovieGridSection({ title, movies }: MovieGridSectionProps) {
       </h2>
 
       {/* Movie Grid */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5 xl:grid-cols-6">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-5 lg:grid-cols-4 xl:grid-cols-5">
         {movies.map((movie) => (
           <MovieCard key={movie.slug} movie={movie} />
         ))}

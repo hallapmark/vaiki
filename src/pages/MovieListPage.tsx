@@ -32,7 +32,6 @@ export function MovieListPage() {
           movies={silentCinemaMovies.slice(0, 6)} 
         />
       </div>
-
     </div>
   );
 }

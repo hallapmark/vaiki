@@ -1,3 +1,4 @@
+import { Header } from '../components/Header';
 import { HeroSection } from '../components/HeroSection';
 import { MovieGridSection } from '../components/MovieGridSection';
 import { getFeaturedMovie, getMoviesByCategory } from '../data/movies';
@@ -10,8 +11,8 @@ export function MovieListPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       
-      {/* Hero Section */}
       <HeroSection movie={featuredMovie} />
 
       {/* Movie Grid Sections */}

@@ -146,24 +146,4 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: oklch(0.4 0 0);
 }
-
-/* Video player loading animation */
-@keyframes fillUp {
-  0% {
-    clip-path: inset(100% 0 0 0);
-    opacity: 0.5;
-  }
-  50% {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-  100% {
-    clip-path: inset(100% 0 0 0);
-    opacity: 0.5;
-  }
-}
-
-.animate-fill-up {
-  animation: fillUp 2s ease-in-out infinite;
-}
 /* <----------------- */

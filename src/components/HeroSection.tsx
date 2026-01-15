@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { Movie } from "../data/movies";
+import type { Movie } from "../api/api";
 import { ArrowRight } from "lucide-react";
 
 interface HeroSectionProps {

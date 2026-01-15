@@ -1,14 +1,51 @@
 import { useParams, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { MovieNotFound } from "../components/MovieNotFound";
-import { getMovieBySlug, getPlaybackUrl } from "../data/movies";
+import { fetchMovieBySlug, fetchPlaybackUrl, type Movie } from "../api/api";
 import { HlsPlayer } from "../components/HlsPlayer";
 import { ArrowLeft, Clock } from "lucide-react";
 
 export function MovieDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  const movie = slug ? getMovieBySlug(slug) : undefined;
+
+  const [movie, setMovie] = useState<Movie | null>(null);
+  const [playbackUrl, setPlaybackUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadMovie() {
+      if (!slug) return;
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        const movieData = await fetchMovieBySlug(slug);
+        setMovie(movieData);
+
+        if (movieData) {
+          // Fetch playback URL
+          try {
+            const playback = await fetchPlaybackUrl(slug);
+            setPlaybackUrl(playback.url);
+          } catch (err) {
+            console.warn('Playback URL not available:', err);
+            // Not a critical error - movie may not have HLS content yet
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load movie:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load movie');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    void loadMovie();
+  }, [slug]);
 
   const backClicked = () => {
     // see useNavigate docs, very odd setup from React Router here for ts.
@@ -17,7 +54,18 @@ export function MovieDetailsPage() {
     navigate("/");
   };
 
-  if (!movie) {
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="flex items-center justify-center h-[60vh]">
+          <div className="text-muted-foreground">Loading...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !movie) {
     return <MovieNotFound />;
   }
 
@@ -43,7 +91,7 @@ export function MovieDetailsPage() {
               {/* HLS Player */}
               <div className="h-full w-full">
                 <HlsPlayer
-                  src={getPlaybackUrl(movie.slug) ?? ""}
+                  src={playbackUrl ?? ""}
                   className="w-full h-full"
                 />
               </div>

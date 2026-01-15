@@ -28,3 +28,5 @@ dist-ssr
 
 #firebase
 .firebaserc
+vaiki-backend/
+dev.env

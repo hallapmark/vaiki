@@ -1,8 +1,9 @@
 import { useParams, useNavigate } from "react-router";
 import { Header } from "../components/Header";
 import { MovieNotFound } from "../components/MovieNotFound";
-import { getMovieBySlug } from "../data/movies";
-import { ArrowLeft, Play, Clock } from "lucide-react";
+import { getMovieBySlug, getPlaybackUrl } from "../data/movies";
+import { HlsPlayer } from "../components/HlsPlayer";
+import { ArrowLeft, Clock } from "lucide-react";
 
 export function MovieDetailsPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -38,32 +39,16 @@ export function MovieDetailsPage() {
           {/* Main Content */}
           <div className="space-y-8">
             {/* Video Player Placeholder */}
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-secondary">
-              {/* Placeholder for HLS Player */}
-              <div className="flex h-full flex-col items-center justify-center bg-linear-to-br from-secondary to-background/50">
-                <div className="mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary/20 backdrop-blur-sm">
-                  <Play
-                    className="h-10 w-10 text-primary"
-                    fill="currentColor"
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Video player will be integrated here
-                </p>
-                <p className="mt-1 text-xs text-muted-foreground/60">
-                  HLS streaming with signed CloudFront URLs
-                </p>
+            <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-secondary group">
+              {/* HLS Player */}
+              <div className="h-full w-full">
+                <HlsPlayer
+                  src={getPlaybackUrl(movie.slug) ?? ""}
+                  className="w-full h-full"
+                />
               </div>
 
-              {/* Play Button Overlay (for visual design) */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity hover:opacity-100">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/90 backdrop-blur-sm">
-                  <Play
-                    className="h-8 w-8 text-primary-foreground"
-                    fill="currentColor"
-                  />
-                </div>
-              </div>
+
             </div>
 
             {/* Movie Info */}

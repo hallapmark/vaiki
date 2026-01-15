@@ -31,11 +31,13 @@ export function HeroSection({ movie }: HeroSectionProps) {
       <div className="relative z-10 mx-auto flex h-full max-w-7xl items-end px-6 pb-12 md:items-center md:pb-0 lg:px-8">
         <div className="max-w-2xl">
           {/* Featured Badge */}
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 md:mb-4 md:px-4 md:py-1.5">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-            <span className="text-xs uppercase tracking-wider text-primary md:text-sm">
-              Featured
-            </span>
+          <div className="mb-3 flex flex-wrap items-center gap-2 md:mb-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 md:px-4 md:py-1.5">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+              <span className="text-xs uppercase tracking-wider text-primary md:text-sm">
+                {movie.featureText}
+              </span>
+            </div>
           </div>
 
           {/* Title */}

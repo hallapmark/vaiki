@@ -18,6 +18,7 @@ export interface Movie {
   director?: string;
   country?: string;
   featured: boolean;
+  featureText?: string; // optional text shown with featured badge
 }
 
 export interface Category {

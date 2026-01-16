@@ -186,7 +186,7 @@ export function MovieDetailsPage() {
               )}
 
               {/* Quality selector will go here */}
-              <div className="border-t border-border pt-4">
+              {/* <div className="border-t border-border pt-4">
                 <dt className="text-sm text-muted-foreground">
                   Available Quality
                 </dt>
@@ -204,7 +204,7 @@ export function MovieDetailsPage() {
                     480p (Pending)
                   </div>
                 </dd>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

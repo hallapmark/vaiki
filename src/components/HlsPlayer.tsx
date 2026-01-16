@@ -51,7 +51,7 @@ export const HlsPlayer = ({ src, className }: HlsPlayerProps) => {
 
     if (!Hls.isSupported()) {
       setErrorMessage(
-        "Playback not supported on this browser. Please use Chrome or Firefox with MSE enabled."
+        "Playback not supported on this browser."
       );
       return;
     }

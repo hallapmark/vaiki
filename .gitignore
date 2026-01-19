@@ -26,6 +26,9 @@ dist-ssr
 #cache catch-all
 *.cache
 
+#env
+.env.production.local
+
 #firebase
 .firebaserc
 vaiki-backend/

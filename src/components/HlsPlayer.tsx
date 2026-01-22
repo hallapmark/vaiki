@@ -50,9 +50,18 @@ export const HlsPlayer = ({ src, className }: HlsPlayerProps) => {
     }
 
     if (!Hls.isSupported()) {
-      setErrorMessage(
-        "Playback not supported on this browser."
-      );
+      // hls.js requires MSE. Fallback to native HLS (Safari / WebKit-based browsers)
+      // — let the browser's native <video> element handle .m3u8 if it can.
+      // Note : modern iOS browsers seem to support hls.js but still adding the fallback
+      // just in case.
+      if (
+        video.canPlayType &&
+        video.canPlayType("application/vnd.apple.mpegurl")
+      ) {
+        video.src = src;
+      } else {
+        setErrorMessage("Playback not supported on this browser.");
+      }
       return;
     }
 

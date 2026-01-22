@@ -26,10 +26,15 @@ dist-ssr
 #cache catch-all
 *.cache
 
-#env
-.env.production.local
-
 #firebase
 .firebaserc
-vaiki-backend/
+
+#env
+.env.production.local
 dev.env
+
+#environment secrets
+*.pem
+*.key
+
+vaiki-backend/

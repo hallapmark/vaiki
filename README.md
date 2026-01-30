@@ -1,74 +1,115 @@
-# Vaiki streamer
-# React + TypeScript + Vite + TailwindCSS
+# Vaiki Retro Films Streamer — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 
-Currently, two official plugins are available:
+A demo adaptive bitrate streaming platform showcasing a React frontend for a retro/classic film library. Built as a portfolio project to demonstrate full-stack streaming architecture with AWS media delivery.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> 🎬 **[Live Demo](https://retro-films-c5171.web.app)** · 📦 **[Backend Repository](https://github.com/hallapmark/vaiki-backend)**
 
-## React Compiler
+![Vaiki Retro Films Streamer Screenshot](readme-screenshot.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<!-- TODO: Replace with actual screenshot or GIF of the player in action -->
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Overview
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Vaiki is a retro films streaming platform that demonstrates production-grade video delivery patterns. The platform streams classic public domain films using adaptive bitrate technology (HLS) which allows smooth playback across changing network conditions.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### System Architecture
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+┌─────────────────┐                 ┌──────────────────┐
+│                 │                 │                  │
+│  React Frontend │◀────────────────│  Backend API     │
+│                 │  Signed URLs    │  (Render)        │
+│                 │                 │                  │
+└────────┬────────┘                 └──────────────────┘
+         │
+         │ HLS video streams
+         │ (using signed URLs)
+         │
+         ▼
+┌─────────────────────────────┐
+│          AWS                │
+│  S3 + CloudFront CDN        │
+│  (Media Storage + CDN)      │
+└─────────────────────────────┘
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **AWS S3 + CloudFront**: Chosen for S3's durability with large media files and CloudFront's global CDN for low-latency streaming in varying locations.
+- **Render (Backend)**: Containerized deployment, rapid iteration on business logic.
+- **React + Vite (Frontend)**: Modern frontend framework, fast hot module replacement for convenient development.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Features
+
+- **Adaptive Bitrate Streaming** — HLS player with automatic quality switching (480p SD → 720p HD → 1080p HD) and quality badge display
+- **Responsive Movie Browser** — Grid-based movie catalog with category sections and featured hero banner
+- **Secure Playback** — Time-limited signed URLs for video streams (generated by backend)
+- **Modern UX** — Lazy-loaded images, parallel data fetching, hover effects, and smooth transitions
+- **Mobile-First Design** — Responsive layouts from 2 to 5 columns based on viewport
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Environment Setup for Local Dev
+
+Create a `.env.development.local` file in the project root:
+
+```env
+VITE_BACKEND_URL=http://localhost:8080
 ```
+
+Point this to your running instance of [vaiki-backend](https://github.com/hallapmark/vaiki-backend).
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+---
+
+## Project Structure
+
+```
+src/
+├── api/          # Backend API integration with typed fetch functions
+├── components/   # Reusable UI components (HlsPlayer, MovieCard, etc.)
+├── pages/        # Route-level page components
+└── data/         # Type definitions and mock data
+```
+
+---
+
+## Related
+
+- **Backend API**: [vaiki-backend](https://github.com/hallapmark/vaiki-backend) — Go service handling movie metadata and signed URL generation
+- **Live Demo**: [retro-films-c5171.web.app](https://retro-films-c5171.web.app)
+
+---
+
+## Content Note
+
+All films featured in this demo are in the public domain, including classics such as _All Quiet on the Western Front_ (1930), _His Girl Friday_ (1940), and _Charade_ (1963).

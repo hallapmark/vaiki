@@ -7,7 +7,7 @@
 
 A demo adaptive bitrate streaming platform showcasing a React frontend for a retro/classic film library. Built as a portfolio project to demonstrate full-stack streaming architecture with AWS media delivery.
 
-> 🎬 **[Live Demo](https://retro-films-c5171.web.app)** · 📦 **[Backend Repository](https://github.com/hallapmark/vaiki-backend)**
+> 🎬 **[Live Demo](https://retro-films-c5171.web.app)** · **[Backend Repository](https://github.com/hallapmark/vaiki-backend)**
 
 ![Vaiki Retro Films Streamer Screenshot](readme-screenshot.png)
 
@@ -105,7 +105,7 @@ src/
 
 ## Related
 
-- **Backend API**: [vaiki-backend](https://github.com/hallapmark/vaiki-backend) — Go service handling movie metadata and signed URL generation
+- **Backend API**: [vaiki-backend](https://github.com/hallapmark/vaiki-backend) — handles movie metadata and signed URL generation
 - **Live Demo**: [retro-films-c5171.web.app](https://retro-films-c5171.web.app)
 
 ---

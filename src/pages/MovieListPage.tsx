@@ -49,7 +49,7 @@ export function MovieListPage() {
       <div className="min-h-screen bg-background">
         <Header />
         <div className="flex items-center justify-center h-[60vh]">
-          <div className="text-muted-foreground">Loading ...</div>
+          <div className="text-muted-foreground">Loading ....</div>
         </div>
       </div>
     );
